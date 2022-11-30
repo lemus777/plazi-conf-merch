@@ -16,7 +16,7 @@ const Header = () => {
       </h1>
       <div className="Header-checkout">
         <Link to='/checkout'>
-          <i className='fa-solid fa-basket-shopping' />
+          <i className='fa-solid fa-basket-shopping' /> {/* esto de la i es para usar iconos de font awesome*/ }
         </Link>
         {cart.length > 0 && <div className='Header-alert'>{cart.length}</div>}
       </div>
