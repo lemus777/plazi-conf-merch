@@ -1,6 +1,5 @@
 import React, { useContext } from "react";
 import { AppContext } from "../context/AppContext";
-import { Map } from '../components/Map';
 import '../styles/components/Success.css';
 
 const Success = () => {
