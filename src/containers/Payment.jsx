@@ -3,8 +3,10 @@ import { PayPalButton } from "react-paypal-button-v2";
 import { AppContext } from '../context/AppContext';
 import { handleSumTotal } from "../utils/sumTotal";
 import '../styles/components/Payment.css';
+import { useNavigate } from "react-router-dom";
 
-const Payment = ({ navigate }) => {
+const Payment = () => {
+  const navigate = useNavigate()
   const { state, addNewOrder } = useContext(AppContext);
   const { cart, buyer } = state;
 
@@ -20,7 +22,6 @@ const Payment = ({ navigate }) => {
   }
 
   const handlePaymentSuccess = (data) => {
-    console.log(data);
     if (data.status === 'COMPLETED') {
       const newOrder = {
         buyer,
@@ -30,7 +31,7 @@ const Payment = ({ navigate }) => {
       addNewOrder(newOrder);
       navigate('/checkout/success');
     }
-  }
+  };
 
   return (
     <div className="Payment">
@@ -49,10 +50,10 @@ const Payment = ({ navigate }) => {
             paypalOptions={paypalOptions}
             buttonStyles={buttonStyles}
             amount={handleSumTotal(cart)}
-            onPaymentStart={() => console.log('Start Payment')}
-            onPaymentSuccess={data => handlePaymentSuccess(data)}
-            onPaymentError={error => console.log(error)}
-            onPaymentCancel={data => console.log(data)}
+            onStart={() => console.log('Start Payment')}
+            onSuccess={(data) => handlePaymentSuccess(data)}
+            onError={(error) => console.log(error)}
+            onCancel={(data) => console.log(data)}
           />
         </div>
       </div>
