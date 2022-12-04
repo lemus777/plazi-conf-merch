@@ -1,8 +1,20 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import axios from 'axios';
 import initialState from '../initialState.js';
+
+const API = 'http://localhost:1337/api/products-plur';
 
 const useInitialState = () => {
   const [state, setState] = useState(initialState);
+  const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+    const getData = async () => {
+      const response = await axios(API);
+      setProducts(response.data.data);
+    };
+    getData();
+  }, []);
 
   const addToCart = payload => {
     setState({
@@ -37,6 +49,7 @@ const useInitialState = () => {
     removeFromCart,
     addToBuyer,
     addNewOrder,
+    products,
     state
   };
 };
